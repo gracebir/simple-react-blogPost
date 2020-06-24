@@ -1,8 +1,10 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 import Header from './components/layout/Header';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router,Route } from 'react-router-dom';
 import Posts from './components/pages/Posts';
+import NewPost from './components/pages/NewPost';
+import Home from './components/pages/Home';
+
 
 
 
@@ -11,7 +13,9 @@ function App() {
     <Router>
       <Header/>
       <div className="container">
-        <Posts/>
+        <Route exact path='/' component={Home}/>
+        <Route path='/post' component={Posts}/>
+        <Route path='/addPost' component={NewPost}/>
       </div>
     </Router>
   );
