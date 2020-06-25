@@ -22,6 +22,7 @@ export class NewPost extends Component {
             title:this.state.title,
             content:this.state.content
         }
+        
         fetch('http://localhost:5000/api/blogpost/post',{
             method:"POST",
             headers:{

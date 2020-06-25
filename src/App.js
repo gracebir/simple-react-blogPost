@@ -4,13 +4,17 @@ import { BrowserRouter as Router,Route } from 'react-router-dom';
 import Posts from './components/pages/Posts';
 import NewPost from './components/pages/NewPost';
 import Home from './components/pages/Home';
+import { Provider } from 'react-redux';
+import store from './store';
 
 
 
 
 function App() {
   return (
-    <Router>
+
+    <Provider store={store}>
+      <Router>
       <Header/>
       <div className="container">
         <Route exact path='/' component={Home}/>
@@ -18,6 +22,8 @@ function App() {
         <Route path='/addPost' component={NewPost}/>
       </div>
     </Router>
+    </Provider>
+   
   );
 }
 

@@ -1,19 +1,15 @@
-import React, { Component,Fragment } from 'react'
-import {Link } from 'react-router-dom';
+import React, { Component,Fragment } from 'react';
+import { connect } from 'react-redux';
+import { getBlog } from '../../actions/blog';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 export class Posts extends Component {
 
-    constructor(props){
-        super(props);
-        this.state = {
-            posts : []
-        }
-    }
     componentWillMount(){
-        fetch('http://localhost:5000/api/blogpost')
-        .then(res => res.json())
-        .then(data => this.setState({posts: data}));
+       this.props.getBlog();
     }
+
     render() {
         return (
             <Fragment>
@@ -27,11 +23,11 @@ export class Posts extends Component {
                     <th><Link to="/addPost" className="btn btn-primary float-right mf-10">Add</Link></th>
                 </thead>
                 <tbody>
-                    {this.state.posts.map(post =>(
-                        <tr key={post.id}>
-                            <td>{post.date_p}   </td>
-                            <td>{post.title}</td>
-                            <td>{post.content}</td>
+                    {this.props.blog.map(blog =>(
+                        <tr key={blog.id}>
+                            <td>{blog.date_p}   </td>
+                            <td>{blog.title}</td>
+                            <td>{blog.content}</td>
                             <td><button className="btn btn-danger btn-sm">
                                 delete post</button></td>
                         </tr>
@@ -45,4 +41,16 @@ export class Posts extends Component {
     }
 }
 
-export default Posts
+
+Posts.propTypes={
+    getBlog: PropTypes.func.isRequired,
+    blog: PropTypes.array.isRequired
+}
+
+const mapStateToProps = (state) =>{
+    return {
+        blog: state.blog.items
+    }
+}
+
+export default connect(mapStateToProps, { getBlog })(Posts);
