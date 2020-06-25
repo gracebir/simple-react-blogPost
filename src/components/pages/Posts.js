@@ -1,6 +1,6 @@
 import React, { Component,Fragment } from 'react';
 import { connect } from 'react-redux';
-import { getBlog } from '../../actions/blog';
+import { getBlog, deleteBlog } from '../../actions/blog';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
@@ -28,8 +28,8 @@ export class Posts extends Component {
                             <td>{blog.date_p}   </td>
                             <td>{blog.title}</td>
                             <td>{blog.content}</td>
-                            <td><button className="btn btn-danger btn-sm">
-                                delete post</button></td>
+                            <td><button onClick={this.props.deleteBlog.bind(this, blog.id)} className="btn btn-danger btn-sm">
+                              {" "}  delete post</button></td>
                         </tr>
                     ))}
                 </tbody>        
@@ -44,7 +44,8 @@ export class Posts extends Component {
 
 Posts.propTypes={
     getBlog: PropTypes.func.isRequired,
-    blog: PropTypes.array.isRequired
+    blog: PropTypes.array.isRequired,
+    deleteBlog: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) =>{
@@ -53,4 +54,4 @@ const mapStateToProps = (state) =>{
     }
 }
 
-export default connect(mapStateToProps, { getBlog })(Posts);
+export default connect(mapStateToProps, { getBlog,deleteBlog })(Posts);

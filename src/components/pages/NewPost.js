@@ -1,4 +1,8 @@
 import React, { Component, Fragment } from 'react'
+import { connect } from 'react-redux';
+import { postBlog } from '../../actions/blog';
+import PropTypes from 'prop-types';
+
 
 export class NewPost extends Component {
 
@@ -22,17 +26,7 @@ export class NewPost extends Component {
             title:this.state.title,
             content:this.state.content
         }
-        
-        fetch('http://localhost:5000/api/blogpost/post',{
-            method:"POST",
-            headers:{
-                'Accept': 'application/json, text/plain, */*',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(post)
-        })
-        .then(res => res.json())
-        .then(data => console.log(data))
+        this.props.postBlog(post);
     }
 
     render() {
@@ -59,4 +53,9 @@ export class NewPost extends Component {
     }
 }
 
-export default NewPost
+NewPost.propTypes = {
+    getPost: PropTypes.func.isRequired
+}
+
+
+export default connect(null, { postBlog })(NewPost);

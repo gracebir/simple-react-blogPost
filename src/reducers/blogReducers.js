@@ -1,4 +1,4 @@
-import { GET_BLOG } from '../actions/types';
+import { GET_BLOG, POST_BLOG, DELETE_BLOG } from '../actions/types';
 
 
 const initialState = {
@@ -15,6 +15,16 @@ export default function(state=initialState, action){
                 ...state,
                 items: action.payload
             };
+        case POST_BLOG:
+            return{
+                ...state,
+                item: action.payload
+            };
+        case DELETE_BLOG:
+            return{
+                ...state,
+                items: state.items.filter(blog => blog.id !== action.payload)
+            }
         default:
             return state;
     }
