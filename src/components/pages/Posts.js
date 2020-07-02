@@ -15,7 +15,7 @@ export class Posts extends Component {
             <Fragment>
                 {/* <div className="card card-body mt-4 mb-4"> */}
                 <h2 className="mt-4">Post Page </h2>
-                <table className="table tables-triped mt-4">
+                <table className="table tables-triped">
                 <thead>
                     <th><h3> Date</h3></th>
                     <th><h3> Title</h3> </th>
@@ -54,4 +54,4 @@ const mapStateToProps = (state) =>{
     }
 }
 
-export default connect(mapStateToProps, { getBlog,deleteBlog })(Posts);
+export default connect(mapStateToProps, { getBlog, deleteBlog })(Posts);
